@@ -110,8 +110,14 @@ resource "azurerm_logic_app_workflow" "backup" {
 
   # Parameters used to pass configuration values to the workflow definition
   workflow_parameters = {
-    "storageAccountName" = var.storage_account_name != "" ? var.storage_account_name : "st${var.workload}${random_string.suffix.result}"
-    "containerName"      = var.container_name
+    "storageAccountName" = jsonencode({
+      type  = "String"
+      value = var.storage_account_name != "" ? var.storage_account_name : "st${var.workload}${random_string.suffix.result}"
+    })
+    "containerName" = jsonencode({
+      type  = "String"
+      value = var.container_name
+    })
   }
 
   tags = merge(var.common_tags, {
