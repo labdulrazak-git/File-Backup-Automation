@@ -1,4 +1,4 @@
-# Azure Simple File Backup Automation (Terraform)
+# Azure File Backup Automation (Terraform)
 
 [![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=flat-square&logo=microsoftazure&logoColor=white)](https://azure.com/)
 [![Terraform](https://img.shields.io/badge/terraform-%23623CE4.svg?style=flat-square&logo=terraform&logoColor=white)](https://www.terraform.io/)
