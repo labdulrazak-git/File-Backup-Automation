@@ -5,8 +5,49 @@
 
 A minimalist, serverless, and cost-optimized infrastructure blueprint to automate business file backups. This solution replaces risky, manual workflows with an automated Azure Logic App that securely schedules and pushes files into a private Azure Blob Storage container.
 
-```
-[Local/Network Files] ──> [Logic App (Daily Trigger)] ──> [Blob Storage (Cool Tier)]
+
+```mermaid
+graph LR
+    %% Subgraphs assigned with clean alphanumeric IDs to prevent parser failure
+    
+    subgraph src["1. Source"]
+        FILES[📄 Local Files / Network Share]
+    end
+    
+    subgraph auto["2. Compute & Automation"]
+        TRIGGER[⏰ Recurrence Trigger]
+        LOGIC[⚙️ Logic Apps Workflow]
+    end
+    
+    subgraph store["3. Target Storage"]
+        CONTAINER[📁 Blob Container]
+        STORAGE[(🗄️ Storage Account)]
+    end
+    
+    subgraph obs["4. Observability"]
+        MONITOR[📊 Workflow History]
+    end
+
+    %% Flow connections
+    TRIGGER --> LOGIC
+    FILES --> LOGIC
+    LOGIC --> CONTAINER
+    CONTAINER --> STORAGE
+    LOGIC --> MONITOR
+
+    %% Premium Minimalist Theme (Clean Tech Styling)
+    classDef default fill:#f9fbfd,stroke:#b4c6e7,stroke-width:1px,color:#2c3e50,font-weight:bold;
+    classDef highlight fill:#e1f5fe,stroke:#0288d1,stroke-width:1.5px,color:#01579b;
+    classDef storage fill:#e8f5e9,stroke:#388e3c,stroke-width:1.5px,color:#1b5e20;
+    
+    class LOGIC,TRIGGER highlight;
+    class STORAGE,CONTAINER storage;
+    
+    %% Subgraph Styling using the clean IDs
+    style src fill:#fafafa,stroke:#e0e0e0,stroke-width:1px,stroke-dasharray: 5 5;
+    style auto fill:#fafafa,stroke:#e0e0e0,stroke-width:1px,stroke-dasharray: 5 5;
+    style store fill:#fafafa,stroke:#e0e0e0,stroke-width:1px,stroke-dasharray: 5 5;
+    style obs fill:#fafafa,stroke:#e0e0e0,stroke-width:1px,stroke-dasharray: 5 5;
 ```
 <br>
 
